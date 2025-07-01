@@ -29,9 +29,15 @@ export class App extends React.Component<{}, State> {
     }, 3300);
   }
 
+  componentWillUnmount(): void {
+    document.removeEventListener('contextmenu', this.handleDocumentRightClick);
+    document.removeEventListener('click', this.handleDocumentClick);
+
+    window.clearInterval(this.clockNameId);
+  }
+
   handleDocumentClick = () => {
     this.setState({ hasClock: true });
-    // window.clearInterval(this.clockNameId);
   };
 
   handleDocumentRightClick = (event: MouseEvent) => {
